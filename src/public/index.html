@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <title>Back-end Assesment</title>
+</head>
+<body>
+
+  <h1>Documentación</h1>
+  <p>Las propiedades necesarias para el registro de usuarios como de listas FavList y de Favs queda sujeto a las restricciones señaladas en el documento original. </p>
+  <h2>Rutas base</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>End-point</th>
+        <th>Colección</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>/api/favs/</td>
+        <td>fav</td>
+      </tr>
+      <tr>
+        <td>/api/favLists/</td>
+        <td>favList</td>
+      </tr>
+      <tr>
+        <td>/auth/local/</td>
+        <td>user</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Modo de uso</h3>
+  <div class="container">
+    <p class="list-title">1. user</p>
+      <p>Registro de nuevo usuario, signup: Petición POST a ruta /auth/local/signup</p>
+      <p>Login de usuario, signin: Petición POST a ruta /auth/local/signin</p>
+    <p class="list-title">2. fav</p>
+      <p>Listar todos los fav: Petición GET a ruta /api/favs</p>
+      <p>Listar un fav: Petición GET a ruta /api/favs/:favId donde favId representa el ID que retorna mongo atlas</p>
+      <p>Crear un fav: Petición POST a ruta /api/favs/:favListId donde favListId representa el ID que retorna mongo atlas de la Lista de Favs que desea vincular</p>
+      <p>Modificar un fav: Petición PUT a ruta /api/favs/:favId donde favId representa el ID que retorna mongo atlas del respectivo Fav</p>
+      <p>Eliminar un fav: Petición DELETE a ruta /api/favs/:favId donde favId representa el ID que retorna mongo atlas del respectivo Fav</p>
+    <p class="list-title">3. favList</p>
+      <p>Listar todos las favList: Petición GET a ruta /api/favLists</p>
+      <p>Listar un favList: Petición GET a ruta /api/favLists/:favListId donde favListId representa el ID que retorna mongo atlas</p>
+      <p>Crear un favList: Petición POST a ruta /api/favLists/:userId donde userId representa el ID que retorna mongo atlas de usuario que desea vincular</p>
+      <p>Modificar un favList: Petición PUT a ruta /api/favLists/:favListId donde favListId representa el ID que retorna mongo atlas del respectivo FavList</p>
+      <p>Eliminar un favList: Petición DELETE a ruta /api/favLists/:favListId donde favListId representa el ID que retorna mongo atlas del respectivo FavList</p>
+  </div>
+
+  
+</body>
+</html>
