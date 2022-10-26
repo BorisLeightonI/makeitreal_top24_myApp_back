@@ -9,6 +9,7 @@ const favSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  link: String,
   FavList : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'FavList'

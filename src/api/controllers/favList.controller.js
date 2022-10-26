@@ -2,18 +2,16 @@ const FavList = require('../models/favList.model');
 const User = require('../models/user.model');
 
 const list = (req, res) => {
-  FavList.find()
-  .then( favLists => res.status(200).json({message: 'Listas ubicadas exitosamente', data: favLists}))
+
+  FavList.find({user: req.userId})
+  .then( favLists => res.status(200).json({message: 'Listas de usuario ubicadas exitosamente', data: favLists}))
   .catch( err => res.status(400).json({message: 'no se pudo ubicar', data: err}))
 }
 
 const show = async (req, res) => {
 try {
   const { favListId } = req.params;
-  const favList = await FavList.findById(favListId)/* .populate({
-    path: 'user',
-    select: 'fullName email payment'
-  }) */
+  const favList = await FavList.findById(favListId)
   res.status(200).json({message: 'lista ubicado exitosamente', data: favList})
 } catch (error) {
   res.status(400).json({message: 'no se pudo ubicar la lista', data: error})
@@ -41,11 +39,8 @@ const create = async (req, res) => {
   }
 
   const favList = await FavList.create(newFavList);
-  console.log('favlist:', favList);
   user.favLists.push(favList);
-  console.log('user pushList:', user)
   let respUser = await user.save();
-  console.log('save user', respUser);
 
   res.status(200).json({message: 'favList creado exitosamente', data: favList})
   } catch (err) {
