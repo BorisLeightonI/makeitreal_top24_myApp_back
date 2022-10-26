@@ -1,5 +1,6 @@
 const FavList = require('../models/favList.model');
 const User = require('../models/user.model');
+const Favs = require('../models/fav.model');
 
 const list = (req, res) => {
 
@@ -58,7 +59,8 @@ const update = (req, res) => {
 
 const destroy = (req, res) => {
   const { favListId } = req.params;
-
+  Favs.deleteMany({FavList: favListId})
+    .then(count => console.log(`Deleted ${count} Favs`))
   FavList.findByIdAndRemove(favListId)
     .then( favList => res.status(200).json({message: 'curso eliminado exitosamente', data: favList}))
     .catch( err => res.status(400).json({message: 'no se pudo eliminar', data: err}))
