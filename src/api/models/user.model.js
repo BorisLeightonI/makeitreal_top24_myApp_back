@@ -12,13 +12,34 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     validate: [/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/, 'Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character'],
-    required: [true, 'password is required']
+    // required: [true, 'password is required']
   },
+
+  picture : String,
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
+  provider: String,
   
-  favLists: [
+  Products: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'FavList'
+      ref: 'Product'
+    }
+  ],
+
+  Categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category'
+    }
+  ],
+
+  Purchases: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Purchase'
     }
   ]
 
@@ -26,6 +47,6 @@ const UserSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

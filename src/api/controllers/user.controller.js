@@ -8,13 +8,21 @@ const errMessage = (res, message, err) => res.status(400).json({ message, error:
 module.exports = {
   
   signup(req, res) {
-    const { email, password } = req.body
+    const {name, email, password } = req.body
     bcrypt.hash(password, parseInt(process.env.BCRYPT_ROUNDS)||8)
-          .then(encPassword => User.create({email, password: encPassword})
+          .then(encPassword => User.create({name, email, password: encPassword, provider:'local'})
             .then(user => res.status(200).json({ message: "User created successfully", data: { email, token: genToken(user._id) } }))
             .catch(err => errMessage(res, "User could not be created", err))
           )
           .catch(err => errMessage(res, "encryption could not be created", err))
+  },
+
+  signupAuth0(req,res){
+    console.log(req.body)
+    const {name, email, provider} = req.body
+    User.create({name, email, provider})
+      .then(user => res.status(201).json({ message: "User created successfully", data: { email, token: genToken(user._id) } }))
+      .catch(err => errMessage(res, "User could not be created", err))
   },
 
   async signin(req, res) {
